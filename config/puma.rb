@@ -1,3 +1,7 @@
+app_dir = File.expand_path("../..", __FILE__)
+shared_dir = "#{app_dir}/shared"
+
+
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -32,3 +36,19 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+
+if Rails.env == "production"
+  workers ENV.fetch("WEB_CONCURRENCY") { 1 }
+
+  # Set up socket location
+  bind "unix://#{shared_dir}/sockets/puma.sock"
+
+  # Logging
+  stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
+
+  # Set master PID and state locations
+  pidfile "#{shared_dir}/pids/puma.pid"
+  state_path "#{shared_dir}/pids/puma.state"
+  activate_control_app
+end
