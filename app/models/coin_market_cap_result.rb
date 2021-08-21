@@ -16,5 +16,9 @@ class CoinMarketCapResult
     def data_age
       @raw_response.nil? ? nil : Time.now - @fetched_at
     end
+
+    def data_fetch_timestamp
+      ActiveSupport::Duration.build(data_age).ago
+    end
   end
 end
