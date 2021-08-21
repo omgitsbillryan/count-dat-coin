@@ -3,6 +3,7 @@
 class CoinMarketCapResult
   class << self
     attr_accessor :raw_response
+    attr_reader :fetched_at
 
     def raw_response=(val)
       @raw_response = val
