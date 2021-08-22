@@ -1,8 +1,7 @@
 class UserCryptosController < ApplicationController
 
   def index
-    # TODO get cryptos from session
-    @crypto = [UserCrypto.new(amount: 1, type: 'BTC'), UserCrypto.new(amount: 2.5, type: 'ETH')]
+    @cryptos = saved_cryptos.map { |c| UserCrypto.new(c) }
   end
 
   def new
@@ -11,6 +10,18 @@ class UserCryptosController < ApplicationController
   end
 
   def create
-    @crypto = UserCrypto.new
+    user_crypto = UserCrypto.new(permitted_params)
+    saved_cryptos.push(user_crypto)
+    redirect_to user_cryptos_path
+  end
+
+  private
+
+  def saved_cryptos
+    session[:cryptos] ||= []
+  end
+
+  def permitted_params
+    params.require(:user_crypto).permit(:amount, :type)
   end
 end

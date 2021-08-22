@@ -1,6 +1,6 @@
 <h2>Your Cryptos</h2>
 <ul>
-  <% @crypto.each do |crypto| %>
+  <% @cryptos.each do |crypto| %>
   <li><%= crypto.amount %> (<%= crypto.type %>)</li>
   <% end %>
 </ul>
