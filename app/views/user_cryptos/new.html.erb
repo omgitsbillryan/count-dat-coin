@@ -1,5 +1,5 @@
 <h2>Add New Crypto</h2>
-<%= form_with model: @user_crypto do |form| %>
+<%= form_with url: user_cryptos_path do |form| %>
   <%= form.text_field :amount, placeholder: 'Amount' %>
   <%= form.select     :type, ['BTC', 'ETH'] %>
   <%= form.submit %>

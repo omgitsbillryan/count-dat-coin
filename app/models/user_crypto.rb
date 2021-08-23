@@ -1,10 +1,10 @@
 class UserCrypto
   include ActiveModel::Model
 
-  attr_accessor :amount, :type
+  attr_accessor :amount, :type, :id
 
   # TODO - logic to see if saved to session cookie
   def persisted?
-    false
+    true
   end
 end

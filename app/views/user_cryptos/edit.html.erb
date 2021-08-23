@@ -1,0 +1,7 @@
+<h2>Edit Crypto</h2>
+
+<%= form_with model: UserCrypto.new(@crypto_from_session) do |form| %>
+  <%= form.text_field :amount %>
+  <%= form.select :type, ['BTC', 'ETH'] %>
+  <%= form.submit %>
+<% end %>
