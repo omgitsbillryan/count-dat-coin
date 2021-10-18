@@ -2,12 +2,16 @@
 
 class CoinMarketCapResult
   class << self
-    attr_accessor :raw_response
-    attr_reader :fetched_at
+    attr_writer :raw_response
+    attr_reader :fetched_at, :parsed_response
 
     def raw_response=(val)
       @raw_response = val
       @fetched_at = Time.now
+    end
+
+    def parsed_response
+      @parsed_response ||= JSON.parse(@raw_response)['data']
     end
 
     def has_data?

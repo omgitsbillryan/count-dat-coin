@@ -2,6 +2,10 @@ class UserCryptosController < ApplicationController
 
   def index
     @cryptos = saved_cryptos.map { |c| UserCrypto.new(c) }
+
+    @total = @cryptos.sum do |user_crypto| 
+      user_crypto.amount.to_f * get_price(user_crypto)
+    end
   end
 
   def new
@@ -49,5 +53,12 @@ class UserCryptosController < ApplicationController
 
   def crypto_id
     params[:id].to_i
+  end
+
+  # TODO move this logic out of controller
+  def get_price(user_crypto)
+    CoinMarketCapResult.parsed_response.find do |cmc|
+      cmc['symbol'] == user_crypto.type
+    end['quote']['USD']['price']
   end
 end
