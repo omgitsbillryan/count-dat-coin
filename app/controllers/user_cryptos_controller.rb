@@ -34,6 +34,13 @@ class UserCryptosController < ApplicationController
     redirect_to user_cryptos_path
   end
 
+  def destroy
+    crypto_index = saved_cryptos.index { |c| c['id'] == crypto_id }
+    saved_cryptos.slice!(crypto_index)
+    
+    redirect_to user_cryptos_path
+  end
+
   private
 
   def saved_cryptos

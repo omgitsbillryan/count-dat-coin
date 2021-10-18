@@ -2,7 +2,7 @@
 <h3>5000 USD</h3>
 <ul>
   <% @cryptos.each do |crypto| %>
-  <li><%= crypto.amount %> (<%= crypto.type %>) <%= link_to "Edit", edit_user_crypto_path(crypto.id) %></li>
+  <li><%= crypto.amount %> (<%= crypto.type %>) <%= link_to "Edit", edit_user_crypto_path(crypto.id) %> | <%= link_to "Delete", user_crypto_path(crypto.id), method: :delete %></li>
   <% end %>
 </ul>
 
