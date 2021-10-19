@@ -1,5 +1,6 @@
 <h2>Your Crypto</h2>
 <h3><%= Money.from_amount(@total).format %> USD</h3>
+<%= render "shared/fetched_at_banner" %>
 <ul>
   <% @cryptos.each do |crypto| %>
   <li><%= crypto.amount %> (<%= crypto.type %>) <%= link_to "Edit", edit_user_crypto_path(crypto.id) %> | <%= link_to "Delete", user_crypto_path(crypto.id), method: :delete %></li>
@@ -7,5 +8,3 @@
 </ul>
 
 <%= link_to "Add Crypto", new_user_crypto_path %>
-
-<%= render "shared/fetched_at_banner" %>
