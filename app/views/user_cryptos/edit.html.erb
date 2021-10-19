@@ -2,6 +2,9 @@
 
 <%= form_with model: UserCrypto.new(@crypto_from_session) do |form| %>
   <%= form.text_field :amount %>
-  <%= form.select :type, ['BTC', 'ETH'] %>
+  <%= form.select :type, UserCrypto::SYMBOLS %>
   <%= form.submit %>
 <% end %>
+<br/>
+
+<%= link_to 'Back to my crypto', root_path %>
