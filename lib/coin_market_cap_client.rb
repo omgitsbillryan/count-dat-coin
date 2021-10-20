@@ -11,7 +11,7 @@ class CoinMarketCapClient
       start:   "1",
     })
     @request = Net::HTTP::Get.new(@uri)
-    @request["X-Cmc_pro_api_key"] = "e6a1a520-ce5f-46a1-8bd9-3f7d2177567a"
+    @request["X-Cmc_pro_api_key"] = ENV['CMC_PRO_API_KEY']
     @request["Accept"] = "application/json"
     @req_options = {
       use_ssl: @uri.scheme == "https",
